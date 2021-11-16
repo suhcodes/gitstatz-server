@@ -3,6 +3,7 @@ import dotenv from "dotenv";
 import axios from "axios";
 import pkg from "lodash";
 
+const port = process.env.PORT || 4000
 const env = dotenv.config().parsed;
 const app = express();
 const { get } = pkg;
@@ -13,10 +14,10 @@ const { get } = pkg;
   secret client ID
   and code
 */
-const clientID = process.env.SERVER_APP_CLIENT_ID;
-const secretClientID = process.env.SERVER_APP_CLIENT_SECRET_ID;
-const githubAuth = process.env.SERVER_APP_GITHUB_AUTH_URI;
-const redirectURL = process.env.SERVER_APP_CLIENT_REDIRECT_URL;
+const clientID = env.SERVER_APP_CLIENT_ID;
+const secretClientID = env.SERVER_APP_CLIENT_SECRET_ID;
+const githubAuth = env.SERVER_APP_GITHUB_AUTH_URI;
+const redirectURL = env.SERVER_APP_CLIENT_REDIRECT_URL;
 
 const COOKIE_NAME = "github-jwt";
 
@@ -47,4 +48,4 @@ app.get("/api/auth/github", async (req, res) => {
   res.redirect(`${redirectURL}${path}`);
 });
 
-app.listen(4000, () => {});
+app.listen(port, () => {});
