@@ -4,7 +4,6 @@ import axios from "axios";
 import pkg from "lodash";
 
 const port = process.env.PORT || 4000
-const env = dotenv.config();
 const app = express();
 const { get } = pkg;
 
@@ -48,4 +47,4 @@ app.get("/api/auth/github", async (req, res) => {
   res.redirect(`${redirectURL}${path}`);
 });
 
-app.listen(4000, () => {});
+app.listen(port, () => {});
