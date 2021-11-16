@@ -1,6 +1,6 @@
 <h1>
   <div align="center">
-    <img src="./logos/Gitstatz.png" />
+    <img src="./public/logos/Gitstatz.png" />
   </div>
 </h1>
 
