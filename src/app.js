@@ -34,7 +34,7 @@ const getGithubAuthToken = async ({ code }) => {
   return token;
 };
 
-app.get("/api/auth/github", async (req, res) => {
+app.get("/api/auth/github", (req, res) => {
   const code = get(req, "query.code");
   const path = get(req, "query.path", "/");
   if (!code) {
@@ -51,6 +51,10 @@ app.get("/api/auth/github", async (req, res) => {
     .catch((err) => {
       throw err;
     });
+});
+
+app.get("/", (req, res) => {
+  res.send("Olá! Essa é a API do gitstatz :)");
 });
 
 app.listen(port, () => {});
