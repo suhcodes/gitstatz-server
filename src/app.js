@@ -18,17 +18,18 @@ const githubAuth = process.env.SERVER_APP_GITHUB_AUTH_URI;
 
 const COOKIE_NAME = "github-jwt";
 
-const getGithubAuthToken = async ({ code }) => {
+const getGithubAuthToken = ({ code }) => {
   const requestURL = `${githubAuth}/access_token?client_id=${clientID}&client_secret=${secretClientID}&code=${code}`;
-  const githubToken = await axios
+  return axios
     .post(requestURL)
-    .then((res) => res.data)
+    .then((res) => {
+      const decoded = new URLSearchParams(res.data);
+      const token = decoded.get("access_token");
+      return token;
+    })
     .catch((err) => {
       throw err;
     });
-  const decoded = new URLSearchParams(githubToken);
-  const token = decoded.get("access_token");
-  return token;
 };
 
 app.get("/api/auth/github", (req, res) => {
