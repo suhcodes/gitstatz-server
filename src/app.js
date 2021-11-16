@@ -3,7 +3,8 @@ import dotenv from "dotenv";
 import axios from "axios";
 import pkg from "lodash";
 
-const port = process.env.PORT || 4000
+const port = process.env.PORT || 4000;
+const env = dotenv.config();
 const app = express();
 const { get } = pkg;
 
@@ -39,12 +40,17 @@ app.get("/api/auth/github", async (req, res) => {
   if (!code) {
     throw new Error({ message: "No code :(", code: 400 });
   }
-  const token = await getGithubAuthToken({ code });
-  res.cookie(COOKIE_NAME, token, {
-    httpOnly: true,
-    domain: "localhost",
-  });
-  res.redirect(`${redirectURL}${path}`);
+  return getGithubAuthToken({ code })
+    .then((token) => {
+      res.cookie(COOKIE_NAME, token, {
+        httpOnly: true,
+        domain: "localhost",
+      });
+      res.redirect(`${redirectURL}${path}`);
+    })
+    .catch((err) => {
+      throw err;
+    });
 });
 
 app.listen(port, () => {});
