@@ -48,6 +48,4 @@ app.get("/api/auth/github", async (req, res) => {
   res.redirect(`${path}`);
 });
 
-app.listen(port, () => {
-  console.log(port, process.env)
-});
+app.listen(port, () => {});
