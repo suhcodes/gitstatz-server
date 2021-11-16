@@ -1,11 +1,11 @@
 import express from "express";
-import dotenv from "dotenv";
 import axios from "axios";
 import pkg from "lodash";
+import dotenv from "dotenv"
 
-dotenv.config().parsed;
+dotenv.config();
 
-const port = process.env.PORT || 4000
+const port = process.env.PORT || 4000;
 const app = express();
 const { get } = pkg;
 
@@ -13,12 +13,11 @@ const { get } = pkg;
   Set up github URL
   with client ID,
   secret client ID
-  and code
+  and cookie name
 */
 const clientID = process.env.SERVER_APP_CLIENT_ID;
 const secretClientID = process.env.SERVER_APP_CLIENT_SECRET_ID;
 const githubAuth = process.env.SERVER_APP_GITHUB_AUTH_URI;
-
 const COOKIE_NAME = "github-jwt";
 
 const getGithubAuthToken = async ({ code }) => {
@@ -48,4 +47,18 @@ app.get("/api/auth/github", async (req, res) => {
   res.redirect(`${path}`);
 });
 
-app.listen(port, () => {});
+app.listen(port, () => {
+  console.log("server running on port: ", port);
+  console.log(
+    "env vars \nSERVER_APP_CLIENT_ID: ",
+    process.env.SERVER_APP_CLIENT_ID
+  );
+  console.log(
+    "SERVER_APP_CLIENT_SECRET_ID: ",
+    process.env.SERVER_APP_CLIENT_SECRET_ID
+  );
+  console.log(
+    "SERVER_APP_GITHUB_AUTH_URI: ",
+    process.env.SERVER_APP_GITHUB_AUTH_URI
+  );
+});
