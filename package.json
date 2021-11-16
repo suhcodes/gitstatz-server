@@ -12,9 +12,6 @@
     "type": "git",
     "url": "gitstatz"
   },
-  "engines": {
-    "node": "14.x"
-  },
   "keywords": [
     "oauth",
     "github-api",
