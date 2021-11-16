@@ -1,10 +1,8 @@
 import express from "express";
-import dotenv from "dotenv";
 import axios from "axios";
 import pkg from "lodash";
 
 const port = process.env.PORT || 4000;
-const env = dotenv.config();
 const app = express();
 const { get } = pkg;
 
