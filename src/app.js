@@ -3,8 +3,9 @@ import dotenv from "dotenv";
 import axios from "axios";
 import pkg from "lodash";
 
+dotenv.config().parsed;
+
 const port = process.env.PORT || 4000
-const env = dotenv.config().parsed;
 const app = express();
 const { get } = pkg;
 
@@ -14,9 +15,9 @@ const { get } = pkg;
   secret client ID
   and code
 */
-const clientID = env.SERVER_APP_CLIENT_ID;
-const secretClientID = env.SERVER_APP_CLIENT_SECRET_ID;
-const githubAuth = env.SERVER_APP_GITHUB_AUTH_URI;
+const clientID = process.env.SERVER_APP_CLIENT_ID;
+const secretClientID = process.env.SERVER_APP_CLIENT_SECRET_ID;
+const githubAuth = process.env.SERVER_APP_GITHUB_AUTH_URI;
 
 const COOKIE_NAME = "github-jwt";
 
@@ -37,7 +38,7 @@ app.get("/api/auth/github", async (req, res) => {
   const code = get(req, "query.code");
   const path = get(req, "query.path", "/");
   if (!code) {
-    throw new Error({ message: "No code :(", code: 400 });
+    throw new Error();
   }
   const token = await getGithubAuthToken({ code });
   res.cookie(COOKIE_NAME, token, {
@@ -47,4 +48,6 @@ app.get("/api/auth/github", async (req, res) => {
   res.redirect(`${path}`);
 });
 
-app.listen(port, () => {});
+app.listen(port, () => {
+  console.log(port, process.env)
+});

@@ -15,7 +15,6 @@ SERVER_APP_CLIENT_SECRET_ID="YOUR CLIENT SECRET ID"
 SERVER_APP_GITHUB_AUTH_URI="https://github.com/login/oauth"
 SERVER_APP_GITHUB_API_URI="https://api.github.com"
 SERVER_APP_PUBLIC_PATH="/"
-SERVER_APP_CLIENT_REDIRECT_URL="http://localhost:3000/"
 ```
 > There's an exemple file with all the variables named `.env.exemple`.
 
