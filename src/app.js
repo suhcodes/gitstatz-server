@@ -17,7 +17,6 @@ const { get } = pkg;
 const clientID = process.env.SERVER_APP_CLIENT_ID;
 const secretClientID = process.env.SERVER_APP_CLIENT_SECRET_ID;
 const githubAuth = process.env.SERVER_APP_GITHUB_AUTH_URI;
-const redirectURL = process.env.SERVER_APP_CLIENT_REDIRECT_URL;
 
 const COOKIE_NAME = "github-jwt";
 
@@ -46,7 +45,7 @@ app.get("/api/auth/github", (req, res) => {
         httpOnly: true,
         domain: "localhost",
       });
-      res.redirect(`${redirectURL}${path}`);
+      res.redirect(`${path}`);
     })
     .catch((err) => {
       throw err;
