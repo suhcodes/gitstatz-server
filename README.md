@@ -16,7 +16,7 @@ SERVER_APP_GITHUB_AUTH_URI="https://github.com/login/oauth"
 SERVER_APP_GITHUB_API_URI="https://api.github.com"
 SERVER_APP_PUBLIC_PATH="/"
 ```
-> There's an exemple file with all the variables named `.env.exemple`.
+> There's an example file with all the variables named `.env.exemple`.
 
 - Make sure that your Github OAuth callback URL is the same as the one you'll use for your API.
 
